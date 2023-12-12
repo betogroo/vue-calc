@@ -1,28 +1,34 @@
 <script setup lang="ts">
 import { version as vuetifyVersion } from 'vuetify'
 import { version as vueVersion } from 'vue'
-import { useMainStore } from '../store/useMainStore'
-const store = useMainStore()
 </script>
 <template>
   <v-container class="fill-height">
     <v-responsive class="align-center text-center fill-height">
-      <v-row>
-        <v-col>
-          <v-img src="@/assets/vue.svg" />
-          {{ vueVersion }}
+      <v-row justify="center">
+        <v-col
+          class="d-flex justify-center"
+          cols="12"
+          sm="6"
+        >
+          <v-sheet max-width="200">
+            <v-img
+              cover
+              src="@/assets/logo_vue.svg"
+              width="200"
+            />
+            {{ vueVersion }}
+          </v-sheet>
         </v-col>
-        <v-col>
-          <v-img src="@/assets/logo.png" />
-          {{ vuetifyVersion }}
-        </v-col>
-
-        <v-col cols="12">
-          <div class="text-body-1">Testing Store</div>
-
-          <h5 class="text-h6">
-            The HomeView counter value is {{ store.counter }}
-          </h5>
+        <v-col class="d-flex justify-center">
+          <v-sheet max-width="200">
+            <v-img
+              cover
+              src="@/assets/logo_vuetify.svg"
+              width="200"
+            />
+            {{ vuetifyVersion }}
+          </v-sheet>
         </v-col>
       </v-row>
 
