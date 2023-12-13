@@ -1,11 +1,11 @@
 <script setup lang="ts">
 interface Props {
-  value: number
+  value: number | string
 }
 const props = defineProps<Props>()
 
 const $emit = defineEmits<{
-  handleClick: [value: number]
+  handleClick: [value: number | string]
 }>()
 
 const handleClick = () => {
