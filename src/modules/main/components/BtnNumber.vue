@@ -15,10 +15,9 @@ const handleClick = () => {
 
 <template>
   <v-btn
-    class="ma-2 btn-number"
+    class="ma-2"
     color="blue-grey-lighten-2"
-    height="90"
-    width="90"
+    width="100"
     @click.prevent="handleClick"
   >
     <template #default>
