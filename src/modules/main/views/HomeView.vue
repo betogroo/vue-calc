@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { BtnNumber } from '../components'
 
 const display = ref<string>('0')
+const displayAction = ref<string>('')
 
 const num1 = ref(0)
 const num2 = ref(0)
@@ -15,11 +16,15 @@ const updateDisplay = (value: number | string) => {
 
 const resetAll = () => {
   resetDisplay()
-  resetNumbers
+  resetNumbers()
+  resetDisplayAction()
 }
 
 const resetDisplay = () => {
   display.value = '0'
+}
+const resetDisplayAction = () => {
+  displayAction.value = ''
 }
 
 const resetNumbers = () => {
@@ -28,18 +33,28 @@ const resetNumbers = () => {
   action.value = null
 }
 
-const plusNumber = () => {
+const updateDisplayAction = () => {
+  if (displayAction.value === '')
+    displayAction.value = num1.value + ' ' + action.value
+  else {
+    displayAction.value += displayAction.value
+  }
+}
+
+const sum = () => {
   action.value = '+'
   if (num1.value === 0) {
     num1.value = +display.value
+    updateDisplayAction()
     resetDisplay()
   }
 }
 
 const calculate = () => {
-  num2.value = +display.value
-  resetDisplay()
-  display.value = (num1.value + num2.value).toString()
+  // num2.value = +display.value
+  display.value = (num1.value + +display.value).toString()
+  resetDisplayAction()
+  //resetDisplay()
   resetNumbers()
 }
 
@@ -48,11 +63,11 @@ const btn = [9, 8, 7, 6, 5, 4, 3, 2, 1]
 <template>
   <v-container class="ma-0 pa-0">
     <v-card
-      class="d-flex align-center justify-space-between ma-2"
+      class="d-flex flex-column justify-center align-end pr-2"
       height="100"
       variant="tonal"
     >
-      <div class="text-h2 text-right">{{ action }}</div>
+      <div class="text-">{{ displayAction }}</div>
       <div class="text-h2 text-right">{{ display }}</div>
     </v-card>
 
@@ -81,7 +96,7 @@ const btn = [9, 8, 7, 6, 5, 4, 3, 2, 1]
       <v-col>
         <BtnNumber
           value="+"
-          @handle-click="plusNumber"
+          @handle-click="sum"
         />
       </v-col>
       <v-col>
@@ -98,6 +113,9 @@ const btn = [9, 8, 7, 6, 5, 4, 3, 2, 1]
       </v-col>
     </v-row>
 
-    {{ num1 }} - {{ num2 }}
+    <ul>
+      <li>num1: {{ num1 }}</li>
+      <li>num2: {{ num2 }}</li>
+    </ul>
   </v-container>
 </template>
